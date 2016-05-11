@@ -44,6 +44,26 @@ int main(){
 	int size = 0;;
 	syscall(356,store,&size);
 	int index;
+
+	for(;;)
+	{
+		printf("input: ");
+		scanf("%d",&index);
+		if(index == -1)
+		  break;
+		else
+		{
+			int i;
+			for(i=0;store[index].comm[i]!='\0';i++)
+			{
+				printf("%c",store[index].comm[i]);
+			}
+			printf("\n");
+		}
+  	}
+	
+
+
 	for(index=0;index<size;index++)
 	{
 		if(lastIndex == -1)

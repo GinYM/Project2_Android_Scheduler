@@ -8,7 +8,7 @@ MODULE_LICENSE("Dual BSD/GPL");
 #define __NR_hellocall 356
 
 
-//int __kernel index = -1;
+
 
 DEFINE_RWLOCK(buf_lock);
 
@@ -34,7 +34,13 @@ void init_prin(struct task_struct*task,struct prinfo*kernel_buf,int*index)
 	else
 	  kernel_buf[*index].parent_pid = task->real_parent->pid;
 
-	get_task_comm(kernel_buf[*index].comm,task);
+//	get_task_comm(kernel_buf[*index].comm,task);
+	int i;
+	for(i=0;task->comm[i]!='\0';i++)
+	{
+		kernel_buf[*index].comm[i] = task->comm[i];
+	}
+	kernel_buf[*index].comm[i] = '\0';
 	if(list_empty(&task->sibling)==1 )
 	{
 		kernel_buf[*index].next_sibling_pid = 0;
